@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search_bar"
+        android:title="Search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/starred"
+        android:title="Starred"
+        android:icon="@drawable/ic_star"
+
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/Help"
+        android:title="Help"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/About"
+        android:title="About"
+        app:showAsAction="never"
+        />
+
+</menu>
+
+    <!-- app:showAsAction="always"
+    app:showAsAction="ifRoom|collapseActionView"-->
