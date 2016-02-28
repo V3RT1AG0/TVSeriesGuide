@@ -41,6 +41,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myfavviewholder>
     ImageLoader imageLoader = singelton.getImageLoader();
    // ArrayList<Integer> IntArr = new ArrayList<Integer>();
     String x;
+    int drwableid;
 
     MySqliteAdapter mySqliteAdapter;
 
@@ -76,6 +77,18 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myfavviewholder>
         Calendar currentDate = Calendar.getInstance();
         final long diff = targetdate.getTimeInMillis() - currentDate.getTimeInMillis();
         ctd(diff, holder, (Integer) holder.textView1.getTag());
+        holder.bookmarkimage.setImageResource(R.drawable.ic_star_outline);
+        if (mySqliteAdapter.checkdata(in.TableID))
+        {
+            drwableid=R.drawable.ic_star;
+        }
+        else
+        {
+            drwableid= R.drawable.ic_star_outline;
+        }
+        holder.bookmarkimage.setImageResource(drwableid);
+
+
 
        // holder.textView2.setSelected(true);  //****Code for marquee********//
 
@@ -186,7 +199,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myfavviewholder>
         {
             String s = response.getString("Title");
             mi.textView2.setText(s);
-            
+
             String urlthumb = response.getString("Poster");
             //if (urlthumb != (null))
             //{
@@ -267,6 +280,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myfavviewholder>
         ImageView imageView;
         ImageView bookmarkimage;
 
+
         public myfavviewholder(View itemView)
         {
             super(itemView);
@@ -305,14 +319,37 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myfavviewholder>
                 @Override
                 public void onClick(View v)
                 {
-                   // bookmarkimage.setImageResource(R.drawable.ic_star);
 
-                    long id = mySqliteAdapter.insertData(to.TableID);
+
+                    long id = 0;
+                    try
+                    {
+                        id = mySqliteAdapter.insertData(to.TableID);
+                    } catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
                     new Toastnotify(MyApplication.getContext(), "insertData executed id:" + id);
                     if (id == -1)
                     {
                         new Toastnotify(MyApplication.getContext(), "Already added to Favourites");
+                        try
+                        {
+                            mySqliteAdapter.deleteData(to.TableID);
+                        } catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                        bookmarkimage.setImageResource(R.drawable.ic_star_outline);
+
+
                     }
+                    else
+                    {
+                        bookmarkimage.setImageResource(R.drawable.ic_star);
+
+                    }
+
 
                 }
             });

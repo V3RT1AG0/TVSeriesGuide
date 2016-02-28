@@ -61,6 +61,23 @@ public class MySqliteAdapter
         return count;
     }
 
+    public boolean checkdata(int value)
+    {
+        SQLiteDatabase db=mysqlitehelper.getReadableDatabase();
+        Boolean br=false;
+        Cursor cursor=db.query(Mysqlitehelper.tablename, null, null, null, null, null, null);
+        while(cursor.moveToNext())
+        {
+            int index1=cursor.getColumnIndex(Mysqlitehelper.ColumnMainDBid);
+            int databaseID=cursor.getInt(index1);
+            if(databaseID==value)
+            {
+                br=true;
+            }
+        }
+        return br;
+    }
+
     class Mysqlitehelper extends SQLiteOpenHelper
     {
         private static final String databasename = "LocalAndroid.db";
