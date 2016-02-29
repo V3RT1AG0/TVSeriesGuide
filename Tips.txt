@@ -1,0 +1,86 @@
+﻿editTexta=findViewById(R.id.editText1);  //this is in mainactivity.java
+
+In above examlple R.id.editText1 is a view of type android.view.View and editTexta is of type
+android.widget.EditText so we require type casting
+
+so this is the correct format editText1=(EditText)findViewById(R.id.editText1);
+
+all the compnents present in Resources are refrenced from R.java file which is autogenrated
+
+//////////////////////////////////BREAK///////////////////////////////////////////////////////////
+
+String value1=textView1.getText().toString();
+RHS=textView1.getText().toString();  //edittext1.getText() returns a object of CharacterSequence
+CharSeqobj.toString()   //here CharacterSequence class has method toString whch is called
+
+alternative:CharSequence abc=textView1.getText();
+            String value1=abc.toString()
+
+String value1=edittext1.getText().toString(); //same happens as above.onl instead of CharacterSequence object it returns a android.text.Editable object
+                                                   and then the Editable Class toString Method is called.
+
+This might be helpful::http://www.c4learn.com/java/java-returning-object-from-method/
+
+/////////////////////////////////////BREAK///////////////////////////////////////////////////////////
+
+java.lang.Object
+   ↳	android.view.View																//check the 1st line of this textfile
+ 	   ↳	android.widget.TextView
+ 	 	   ↳	android.widget.Button
+ 	 	 	   ↳	android.widget.CompoundButton
+ 	 	 	 	   ↳	android.widget.CheckBox
+ 	 	 	 	 	   ↳	android.support.v7.widget.AppCompatCheckBox
+
+
+ 	 	 	 	 	   In above figure java.lang is a Package which contains Object class.It is present in JDK.
+ 	 	 	 	 	   andrid.view is a package which contains View class and extends Object class from Java.lang Package.This class is present in Android SDK.
+ 	 	 	 	 	   All the other classes except the last one is from android.widget package and extend the class above it.
+
+
+
+
+displayDate.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                textview1.setText(getCurrentDate());
+            }
+
+http://developer.android.com/reference/android/view/View.OnClickListener.html
+The onclicklistener is an INTERFACE WITHIN A CLASS (Class View) and it contains an abstract method :public abstract void onClick (View v)
+So we need to provide the body of this method inside the class.To know why we use new ONClickListener(even though it is an interface) check this link
+http://stackoverflow.com/questions/11815101/view-onclicklistener-a-function-or-interface
+
+
+
+
+Nodes in xml
+Root node:http://www.w3schools.com/Xml/dom_nodes.asp
+A ViewGroup is a special view that can contain other views (called children.)
+http://stackoverflow.com/questions/8020997/removing-all-child-views-from-view
+
+From what I understand LinearLayout ,etc (ViewGroup) are parent layout and if you put any linearlayout,gridlayout or any other
+views in that viewgroup they become children.
+
+
+You can directly jump to a library class by selection it and left click go to declaration
+
+
+>>>>>>>
+View layout=inflater.inflate(R.layout.LINEARLAYOUT,Container,false)
+now button but=(Button)layout.findViewById(R.id.but1) is equivalent to
+    button but=(Button)findViewById(R.id.but1)
+
+Highlight the code and press Ctrl-Alt-T. for proper surround with
+
+
+UI thread and main thread are same in android
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+It is important to note that the Thread is a static inner class.
+It is important to use a static inner class for your background process because otherwise the inner class will contain a reference to the class in which is was created.
+As the thread is passed to the new instance of your activity this would create a memory leak as the old activity would still be referred to by the Thread.
+
+http://www.vogella.com/tutorials/AndroidBackgroundProcessing/article.html
+

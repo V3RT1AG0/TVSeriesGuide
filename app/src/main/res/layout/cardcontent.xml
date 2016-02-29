@@ -7,11 +7,11 @@
 
 
     android:layout_width="fill_parent"
-    android:layout_height="140dp"
+    android:layout_height="150dp"
     android:layout_marginBottom="10dp"
     card_view:cardBackgroundColor="#ECEFF1"
-    card_view:cardCornerRadius="0dp"
-    card_view:cardElevation="0.01dp"
+    card_view:cardCornerRadius="3dp"
+    card_view:cardElevation="3dp"
 
 
     >

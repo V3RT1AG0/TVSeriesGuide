@@ -1,0 +1,28 @@
+(Also check Eclipse)===@
+
+
+http://www.javatpoint.com/this-keyword    //Best resource for this keyword
+http://www.tutorialspoint.com/java/java_encapsulation.htm  //Encapsulation
+http://www.javatpoint.com/package        		//JAVA Package Hierarchy 
+
+
+Head First Java:
+Synchronisation Block @
+
+
+
+
+
+//////////////////////Android/////////////////////////////
+
+//How to set default activity for Android application
+http://www.mkyong.com/android/how-to-set-default-activity-for-android-application/  
+
+//Android Architecure
+http://www.javatpoint.com/android-software-stack
+
+//Why do we put () after an interface OR Concept of inner classes used in this question 
+http://stackoverflow.com/questions/11815101/view-onclicklistener-a-function-or-interface
+
+//Android image fallback rule and how different apis use different images
+http://stackoverflow.com/questions/30490780/android-drawable-folders-fallback-rule

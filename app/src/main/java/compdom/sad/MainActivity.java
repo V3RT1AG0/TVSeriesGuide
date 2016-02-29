@@ -1,9 +1,11 @@
 package compdom.sad;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -11,15 +13,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     RecyclerView recyclerView;
     myadapter adapter;
+    CircularProgressView progressView;
     LinearLayoutManager layout;
     String showUrl = "http://tvseriescountdown.netai.net/GetData.php";
 
@@ -47,11 +54,19 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_main);//Cardlayout code
+        progressView = (CircularProgressView) findViewById(R.id.progress_view);
+        progressView.startAnimation();
+        //new MyTask().execute();                //Code for AsyncTask
         info = new ArrayList<>();
-
-        setContentView(R.layout.activity_main);     //Cardlayout code
         createJSON();
-        if (MyApplication.returnglobalflag() != 1)
+        toolbar = (Toolbar) findViewById(R.id.toolmain);
+        setSupportActionBar(toolbar);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        layout = new LinearLayoutManager(MainActivity.this);
+        recyclerView.setLayoutManager(layout);
+       /*  if (MyApplication.returnglobalflag() != 1)
         {
             try
             {
@@ -61,26 +76,10 @@ public class MainActivity extends AppCompatActivity
             {
                 e.printStackTrace();
             }
-        }
-       /* else
-        {
-            try
-            {
-
-                Thread.sleep(1000);
-            } catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
         } */
-        toolbar = (Toolbar) findViewById(R.id.toolmain);
-        setSupportActionBar(toolbar);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        layout = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layout);
+        /*recyclerView.setLayoutManager(layout);
         adapter = new myadapter(info);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter); */
 
 
     }
@@ -174,6 +173,7 @@ public class MainActivity extends AppCompatActivity
                         parseJSONResponse(response);
 
 
+
                     }
                 },
                 new Response.ErrorListener()                                                         //this is a parameter
@@ -185,10 +185,11 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
         requestQueue.add(jsonObjectRequest);
+        Log.d("C", Thread.currentThread().getName());
     }
 
 
-    private void parseJSONResponse(JSONObject response)
+   private void parseJSONResponse(JSONObject response)
     {
         if (response == null || response.length() == 0)//uncomment later
         {
@@ -218,13 +219,59 @@ public class MainActivity extends AppCompatActivity
 
                 //new Toastnotify(getApplicationContext(), "sad");
                 info.add(new information(a, b - 1, c, d, e, mid, sesa, TableId, title));
+                Log.d("Called n times", Thread.currentThread().getName());
+
             }
         } catch (JSONException e)
         {
             e.printStackTrace();
+        } finally
+        {
+            progressView.setVisibility(View.GONE);
+            adapter = new myadapter(info);
+            recyclerView.setAdapter(adapter);
         }
 
     }
+
+    private class MyTask extends AsyncTask<Void, Void, Void>
+{
+
+
+    @Override
+    protected Void doInBackground(Void... params)
+    {
+        info = new ArrayList<>();
+        createJSON();
+        Log.d("a", "doInBackground: ");
+        return null;
+    }
+
+    @Override
+    protected void onPreExecute()
+    {
+        new Toastnotify(MainActivity.this,"pre");
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid)
+    {
+        Log.d("b", "d0afterdoInBackground: ");
+        toolbar = (Toolbar) findViewById(R.id.toolmain);
+        setSupportActionBar(toolbar);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        layout = new LinearLayoutManager(MainActivity.this);
+        recyclerView.setLayoutManager(layout);
+       new Toastnotify(MainActivity.this,"post");
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values)
+    {
+
+    }
+}
 
 
 

@@ -1,0 +1,82 @@
+﻿editTexta=findViewById(R.id.editText1);  //this is in mainactivity.java
+
+In above examlple R.id.editText1 is a view of type android.view.View and editTexta is of type
+android.widget.EditText so we require type casting
+
+so this is the correct format editText1=(EditText)findViewById(R.id.editText1);
+
+all the compnents present in Resources are refrenced from R.java file which is autogenrated
+
+//////////////////////////////////BREAK///////////////////////////////////////////////////////////
+
+String value1=textView1.getText().toString();
+RHS=textView1.getText().toString();  //edittext1.getText() returns a object of CharacterSequence
+CharSeqobj.toString()   //here CharacterSequence class has method toString whch is called
+
+alternative:CharSequence abc=textView1.getText();
+            String value1=abc.toString()
+
+String value1=edittext1.getText().toString(); //same happens as above.onl instead of CharacterSequence object it returns a android.text.Editable object
+                                                   and then the Editable Class toString Method is called.
+
+This might be helpful::http://www.c4learn.com/java/java-returning-object-from-method/
+
+/////////////////////////////////////BREAK///////////////////////////////////////////////////////////
+
+java.lang.Object
+   ↳	android.view.View																//check the 1st line of this textfile
+ 	   ↳	android.widget.TextView
+ 	 	   ↳	android.widget.Button
+ 	 	 	   ↳	android.widget.CompoundButton
+ 	 	 	 	   ↳	android.widget.CheckBox
+ 	 	 	 	 	   ↳	android.support.v7.widget.AppCompatCheckBox
+
+
+ 	 	 	 	 	   In above figure java.lang is a Package which contains Object class.It is present in JDK.
+ 	 	 	 	 	   andrid.view is a package which contains View class and extends Object class from Java.lang Package.This class is present in Android SDK.
+ 	 	 	 	 	   All the other classes except the last one is from android.widget package and extend the class above it.
+
+
+
+
+displayDate.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                textview1.setText(getCurrentDate());
+            }
+
+http://developer.android.com/reference/android/view/View.OnClickListener.html
+The onclicklistener is an INTERFACE WITHIN A CLASS (Class View) and it contains an abstract method :public abstract void onClick (View v)
+So we need to provide the body of this method inside the class.To know why we use new ONClickListener(even though it is an interface) check this link
+http://stackoverflow.com/questions/11815101/view-onclicklistener-a-function-or-interface
+
+
+
+
+
+>>>>Concept of Singelton http://www.tutorialspoint.com/java/java_using_singleton.htm    which is used while creating Volley Singelton Class
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BREAK@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+<Application android:name=".MyApplication" is set in android manifest file if MyApplication is a subclass of Application class;
+<Activity android:name=".MainActivity " is set in android manifest file by defaut.
+
+Documentation related to Application Class
+Base class for those who need to maintain global application state.
+You can provide your own implementation by specifying its name in your AndroidManifest.xml's <application> tag,
+which will cause that class to be instantiated for you when the process for your application/package is created.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BREAK@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Hello, just an update. we can also build xml vector file from svg using latest gradle build tools.
+So that we do not have to go to another site to covert svg image.
+
+classpath 'com.android.tools.build:gradle:1.5.0'﻿
+
+
+
+
+Some Shortcuts
+ctrl+p to view parameter info
+ctrl+p and ctrl+o to implement or overide default methods eg:oncreate
+http://stackoverflow.com/questions/30490780/android-drawable-folders-fallback-rule   //loading images for differ
