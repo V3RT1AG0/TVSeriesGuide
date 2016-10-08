@@ -9,16 +9,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
 
-
-
-
-
-
-
-
-
-
-<!--******************************************************-->
+    <!--******************************************************-->
     <string name="content_description">Content Description</string>
     <string name="countdown_note">Thanks for checking out the Countdown Timer.\n\nThis timer is
 		ideal for use in counting down an event start date, down to the second!!  Feel free to
@@ -27,5 +18,11 @@
     <string name="hours">hrs</string>
     <string name="minutes">mins</string>
     <string name="seconds">secs</string>
+    <string name="splashscreen">TVSeriesCountdown \n
+                                Developed by: \n
+                                Kushal Siddesh \n
+                                Aditya Gumaste \n
+                                Adityaraj Pednekar
+    </string>
     <string name="title_activity_countdown_timer">CountdownTimerActivity</string>
 </resources>

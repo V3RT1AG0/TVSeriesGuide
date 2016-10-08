@@ -1,7 +1,6 @@
 package compdom.sad;
-//BACKUP
+//BACKUP1
 import android.content.Intent;
-import android.os.CountDownTimer;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,14 +26,13 @@ import java.util.Calendar;
 import java.util.List;
 
 import compdom.sad.SqlLiteContent.MySqliteAdapter;
-
+import compdom.sad.ctd;
 
 /**
  * Created by adity on 12/12/2015.
  */
 public class myadapter extends RecyclerView.Adapter<myadapter.myfavviewholder>
 {
-    public static int SECONDS_IN_A_DAY = 24 * 60 * 60;
     List<information> info;
 
     Singelton singelton = Singelton.instantinate();
@@ -76,7 +74,8 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myfavviewholder>
         //  long diffsec;
         Calendar currentDate = Calendar.getInstance();
         final long diff = targetdate.getTimeInMillis() - currentDate.getTimeInMillis();
-        ctd(diff, holder, (Integer) holder.textView1.getTag());
+        new ctd(diff, holder, (Integer) holder.textView1.getTag()).countDownTimer.start();
+
         holder.bookmarkimage.setImageResource(R.drawable.ic_star_outline);
         if (mySqliteAdapter.checkdata(in.TableID))
         {
@@ -177,7 +176,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myfavviewholder>
 
                     }
                 },
-                new Response.ErrorListener()                                                         //this is a parameter
+                    new Response.ErrorListener()                                                         //this is a parameter
                 {
                     @Override
                     public void onErrorResponse(VolleyError error)
@@ -226,48 +225,6 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myfavviewholder>
         }
 
     }
-
-    void ctd(long diff, final myfavviewholder myvi, final int position)
-    {
-
-        CountDownTimer countDownTimer = new CountDownTimer(diff, 1)
-        {
-
-            @Override
-            public void onTick(long millisUntilFinished)
-            {
-                if (position == (Integer) myvi.textView1.getTag())
-                {
-                    long diffSec = millisUntilFinished / 1000;
-                    long days = diffSec / SECONDS_IN_A_DAY;
-                    long secondsDay = diffSec % SECONDS_IN_A_DAY;
-                    long seconds = secondsDay % 60;
-                    long minutes = (secondsDay / 60) % 60;
-                    long hours = (secondsDay / 3600);
-                    long countmilliforsec = millisUntilFinished % 1000;
-                    long milliseconds = countmilliforsec % (SECONDS_IN_A_DAY);
-
-                    myvi.textView1.setText(days + " days " + hours + " hours " + minutes + " minutes \n" + seconds + " secs " + String.format("%03d", milliseconds) + " millisconds " + "remaining ");
-                    myvi.textView3.setText("Position" + position);
-                }
-
-            }
-
-            @Override
-            public void onFinish()
-            {
-                myvi.textView1.setText("done");
-            }
-        };
-       // myvi.textView3.setText("Position" + position);
-        //if(position!=(Integer)myvi.textView1.getTag())
-        // {
-        //    notifyItemChanged((Integer)myvi.textView1.getTag());
-        // }
-        countDownTimer.start();
-    }
-
-
 
     public class myfavviewholder extends RecyclerView.ViewHolder
     {

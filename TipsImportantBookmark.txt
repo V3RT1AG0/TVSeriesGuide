@@ -26,3 +26,18 @@ http://stackoverflow.com/questions/11815101/view-onclicklistener-a-function-or-i
 
 //Android image fallback rule and how different apis use different images
 http://stackoverflow.com/questions/30490780/android-drawable-folders-fallback-rule
+
+//What all happens when u hit the launcher icon (include Application.java singelton and looper,handler)
+http://stackoverflow.com/questions/30772414/when-are-the-default-looper-and-handler-in-main-thread-created
+
+//A LIST OF ALL ANDROID UI/UX LIBRARIES
+https://github.com/wasabeef/awesome-android-ui
+
+//library for scrollint animation of toolbar
+http://ksoichiro.github.io/Android-ObservableScrollView/docs/overview
+
+//library for materialdrawer/sidebar
+https://github.com/mikepenz/MaterialDrawer
+
+//material icons
+https://github.com/mikepenz/Android-Iconics

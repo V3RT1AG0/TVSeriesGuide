@@ -5,6 +5,7 @@ import android.content.Context;
 
 /**
  * Created by adity on 16/12/2015.
+ * For this to work use android:name=".MyApplication" in android manifest Application tag
  */
 public class MyApplication extends Application
 {

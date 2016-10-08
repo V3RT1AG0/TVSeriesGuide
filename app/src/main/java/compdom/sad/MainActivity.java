@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -234,7 +233,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private class MyTask extends AsyncTask<Void, Void, Void>
+    private class MyTask extends AsyncTask<Void, Void, Void>     //remove this later
 {
 
 
